@@ -8,7 +8,7 @@ const Form = ({ setCity, city, setWeather }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const key = process.env.REACT_APP_API_KEY;
-    
+
     axios
       .get(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
