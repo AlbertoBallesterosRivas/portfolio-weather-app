@@ -2,10 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-.backgroundClouds { 
-    background: url("./components/background.jpg") no-repeat; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
+.backgroundClouds {
+  background: url("./components/background.jpg") no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+input::-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+}

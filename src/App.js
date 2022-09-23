@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Form from "./components/Form";
 import Weather from "./components/Weather";
+import Header from "./components/Header";
 import "./index.css";
 
 const App = () => {
@@ -9,7 +10,10 @@ const App = () => {
 
   return (
     <div className="backgroundClouds absolute w-full h-full">
-      <Form setCity={setCity} city={city} setWeather={setWeather} />
+      <Header>
+        <Form setCity={setCity} city={city} setWeather={setWeather} />
+      </Header>
+
       <Weather weather={weather} city={city} />
     </div>
   );
