@@ -24,3 +24,38 @@ input::-ms-input-placeholder {
   /* Microsoft Edge */
   color: white;
 }
+
+@keyframes basicToDetailed {
+  from {height: 160px}
+  to {height: 332px;}
+}
+
+.detailed {
+  height: 332px;
+  animation-name: basicToDetailed;
+  animation-duration: 1.5s;
+}
+
+@keyframes DetailedToBasic {
+  from {height: 332px}
+  to {height: 160px;}
+}
+
+.backToBasic {
+  height: 160px;
+  animation-name: DetailedToBasic;
+  animation-duration: 1.5s;
+}
+
+@keyframes miniBasicToDetailed {
+  from {width: 160px}
+  to {width: 332px;}
+}
+
+.miniDetailed {
+  width: 332px;
+  animation-name: miniBasicToDetailed;
+  animation-duration: 1.5s;
+}
+
+/* miniBackToBasic */

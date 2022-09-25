@@ -1,14 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import "../index.css";
-const Form = ({ setCity, city, setWeather }) => {
-  const [lat, setLat] = useState(null);
-  const [lon, setLon] = useState(null);
+const Form = ({ setCity, city, setWeather, setForecast }) => {
+
 
   const handleCityChange = (event) => {
     setCity(event.target.value);
   };
-  console.log(lat);
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const key = process.env.REACT_APP_API_KEY;
@@ -19,7 +18,7 @@ const Form = ({ setCity, city, setWeather }) => {
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
       )
       .then(({ data }) => {
-        console.log(data);
+        console.log("weather", data);
         setWeather(data);
         lat = data.coord.lat;
         lon = data.coord.lon;
@@ -29,11 +28,12 @@ const Form = ({ setCity, city, setWeather }) => {
             `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
           )
           .then(({ data }) => {
-            console.log(data);
-            data.list.forEach(element => {
-                let date = new Date(element.dt * 1e3);
-                console.log(date.toLocaleTimeString(), date.toLocaleDateString())
-            });
+            console.log("forecast", data);
+            setForecast(data.list)
+            // data.list.forEach(element => {
+            //     let date = new Date(element.dt * 1e3);
+            //     console.log(date.toLocaleTimeString(), date.toLocaleDateString())
+            // });
           });
       });
   };
@@ -49,6 +49,7 @@ const Form = ({ setCity, city, setWeather }) => {
           className="w-96	h-9 rounded-full bg-[#337a9e] text-center text-white"
         />
         <svg
+          onClick={handleSubmit}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
@@ -65,8 +66,6 @@ const Form = ({ setCity, city, setWeather }) => {
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
       </div>
-
-      <button type="submit">Find</button>
     </form>
   );
 };
