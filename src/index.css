@@ -58,4 +58,20 @@ input::-ms-input-placeholder {
   animation-duration: 1.5s;
 }
 
-/* miniBackToBasic */
+@keyframes miniDetailedToBasic {
+  from {width: 332px}
+  to {width: 160px;}
+}
+
+.miniBackToBasic {
+  width: 160px;
+  animation-name: miniDetailedToBasic;
+  animation-duration: 1.5s;
+}
+
+.capitalize-first {
+  text-transform: lowercase;
+}
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}

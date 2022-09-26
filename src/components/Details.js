@@ -1,4 +1,4 @@
-const Details = ({ weather }) => {
+const Details = ({ weather, mini }) => {
   console.log("details", weather);
   let windDirection = null;
   const degrees = weather.wind.deg;
@@ -150,7 +150,7 @@ const Details = ({ weather }) => {
 
   return (
     <ul className="mt-9">
-      <li className="flex w-1/3 border-t border-solid border-grey justify-between py-2.5">
+      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -173,7 +173,7 @@ const Details = ({ weather }) => {
           {Math.trunc(weather.main.temp_max)}º
         </span>
       </li>
-      <li className="flex w-1/3 border-t border-solid border-grey justify-between py-2.5">
+      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +200,7 @@ const Details = ({ weather }) => {
             </p>
           <span>{weather.main.pressure}mb</span> 
         </li> */}
-      <li className="flex w-1/3 border-t border-solid border-grey justify-between py-2.5">
+      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ const Details = ({ weather }) => {
         </p>
         <span>{weather.visibility}m</span>
       </li>
-      <li className="flex w-1/3 border-t border-solid border-grey justify-between py-2.5">
+      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"

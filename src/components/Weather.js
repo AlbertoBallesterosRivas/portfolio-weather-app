@@ -1,8 +1,11 @@
+import { useState } from "react";
 import "../index.css";
 import MainCard from "./MainCard";
 import MiniCard from "./MiniCard";
 
 const Weather = ({ weather, city, forecast }) => {
+  const [opened, setOpened] = useState(null)
+
   if (!weather || !forecast) {
     return null;
   }
@@ -59,11 +62,11 @@ const Weather = ({ weather, city, forecast }) => {
   );
 
   return (
-    <div className="flex flex-col	items-center mt-16">
+    <div className="flex flex-col	items-center mt-16 w-3/4">
       <MainCard weather={weather} city={city} />
-      <ul className="flex flex-wrap justify-between ">
+      <ul className="flex flex-wrap justify-between mt-10">
         {nextDays.map((day) => (
-          <MiniCard day={day} key={day.dt_tx} />
+          <MiniCard day={day} key={day.dt_tx} opened={opened} setOpened={setOpened} />
         ))}
       </ul>
     </div>

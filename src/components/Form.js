@@ -1,8 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "../index.css";
-const Form = ({ setCity, city, setWeather, setForecast, setNotification }) => {
-
+const Form = ({ setCity, city, setWeather, setForecast, setNotification, setCityForCard }) => {
 
   const handleCityChange = (event) => {
     setCity(event.target.value);
@@ -13,13 +12,15 @@ const Form = ({ setCity, city, setWeather, setForecast, setNotification }) => {
     const key = process.env.REACT_APP_API_KEY;
     let lat = null
     let lon = null
+    setCityForCard(city)
+    
     axios
       .get(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
       )
       .then(({ data }) => {
         console.log("weather", data);
-        setWeather(data);
+        //setWeather(data);
         lat = data.coord.lat;
         lon = data.coord.lon;
 
@@ -30,6 +31,7 @@ const Form = ({ setCity, city, setWeather, setForecast, setNotification }) => {
           )
           .then(({ data }) => {
             console.log("forecast", data);
+            setWeather(data.list[0]);
             setForecast(data.list)
             // data.list.forEach(element => {
             //     let date = new Date(element.dt * 1e3);

@@ -2,19 +2,19 @@ import clouds from "./clouds.png";
 import sunny from "./sunny.png";
 import rain from "./rain.png";
 
-const Icon = ({ weather }) => {
+const MiniIcon = ({ weather }) => {
   switch (weather) {
     case "Clouds":
       return <img src={clouds} alt="" />;
     case "Clear":
       return (
-        <div className="absolute w-52 top-[-55px] right-[-66px]">
+        <div className="w-52 top-[-55px] right-[-66px]">
           <img src={sunny} alt="" />
         </div>
       );
     case "Rain":
       return (
-        <div className="absolute w-52 top-[-55px] right-[-66px]">
+        <div className="w-52 top-[-55px] right-[-66px]">
           <img src={rain} alt="" />
         </div>
       );
@@ -22,4 +22,4 @@ const Icon = ({ weather }) => {
   }
 };
 
-export default Icon;
+export default MiniIcon;
