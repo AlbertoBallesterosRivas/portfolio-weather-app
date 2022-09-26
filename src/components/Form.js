@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "../index.css";
-const Form = ({ setCity, city, setWeather, setForecast }) => {
+const Form = ({ setCity, city, setWeather, setForecast, setNotification }) => {
 
 
   const handleCityChange = (event) => {
@@ -23,6 +23,7 @@ const Form = ({ setCity, city, setWeather, setForecast }) => {
         lat = data.coord.lat;
         lon = data.coord.lon;
 
+        setNotification(null)
         axios
           .get(
             `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
@@ -35,6 +36,9 @@ const Form = ({ setCity, city, setWeather, setForecast }) => {
             //     console.log(date.toLocaleTimeString(), date.toLocaleDateString())
             // });
           });
+      }).catch(error => {
+        console.log('fail')
+        setNotification(`No hay resultados de ${city}`)
       });
   };
 
