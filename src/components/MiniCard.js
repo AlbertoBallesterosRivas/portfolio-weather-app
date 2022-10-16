@@ -1,25 +1,83 @@
 import { useState, useEffect } from "react";
 import Details from "./Details";
-import Icon from "./Icon";
 import MiniIcon from "./MiniIcon";
 
-const MiniCard = ({ day, opened, setOpened }) => {
+const MiniCard = ({ day, opened, setOpened, language, scale }) => {
   const [mouseIn, setMouseIn] = useState(false);
   const [detailed, setDetailed] = useState(null);
+  const [description, setDescription] = useState(null);
+  const date = new Date(day.dt * 1000)
+  const [dateString, setDateString] = useState(null);
+
+  useEffect(() => {
+    switch (language) {
+      case "ES":
+        switch (day.weather[0].main) {
+          case "Clear":
+            setDescription("Soleado");
+            break;
+          case "Rain":
+            setDescription("Lluvia");
+            break;
+          case "Clouds":
+            setDescription("Nublado");
+            break;
+          case "Snow":
+            setDescription("Nieve");
+            break;
+          default:
+            setDescription("Soleado");
+        }
+        break;
+      case "EN":
+        switch (day.weather[0].main) {
+          case "Clear":
+            setDescription("Clear");
+            break;
+          case "Rain":
+            setDescription("Rain");
+            break;
+          case "Clouds":
+            setDescription("Clouds");
+            break;
+          case "Snow":
+            setDescription("Snow");
+            break;
+          default:
+        }
+        break;
+      case "FR":
+        switch (day.weather[0].main) {
+          case "Clear":
+            setDescription("Ensoleillé");
+            break;
+          case "Rain":
+            setDescription("Pluie");
+            break;
+          case "Clouds":
+            setDescription("Nuageux");
+            break;
+          case "Snow":
+            setDescription("Neige");
+            break;
+          default:
+        }
+        break;
+      default:
+        setDescription(null);
+    }
+    let weekDay = date.toLocaleDateString(language, {
+      weekday: "long",
+    })
+    setDateString(`${weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}, ${date.getDate()}`)
+  }, [language]);
   
-  
-if(opened != day.dt && detailed !== "miniBackToBasic"){
+if(opened !== day.dt && detailed !== "miniBackToBasic"){
   setDetailed("miniBackToBasic")
 }
   console.log("day", day);
   const tempKevin = day.main.temp;
   const tempCelsius = tempKevin - 273.15;
-
-  const date = new Date(day.dt * 1000)
-
-  const dateString = `${date.toLocaleDateString("en-EN", {
-    weekday: "long",
-  })}, ${date.getDate()}`;
 
   const handleMouseEnter = () => {
     setMouseIn(true);
@@ -39,9 +97,6 @@ if(opened != day.dt && detailed !== "miniBackToBasic"){
     }
   };
 
-  
-
-
   let cardColor = null;
   switch (day.weather[0].main) {
     case "Clouds":
@@ -58,7 +113,7 @@ if(opened != day.dt && detailed !== "miniBackToBasic"){
 
   return (
     <li
-      className={`flex relative w-44 h-96 rounded-[22px] bg-gradient-to-b ${cardColor} text-white overflow-hidden 
+      className={`relative w-44 h-96 rounded-[22px] bg-gradient-to-b ${cardColor} text-white overflow-hidden 
       cursor-pointer mx-4 minicard ${
         mouseIn ? "shadow-clickable" : ""
       } ${detailed}`}
@@ -66,16 +121,17 @@ if(opened != day.dt && detailed !== "miniBackToBasic"){
       onMouseLeave={handleMouseLeave}
       onClick={handleCard}
     >
-      <div className="flex flex-col justify-between">
+      <div className="">
         <div>
         <p className="pl-8 pt-8 text-lg">{dateString}</p>
-          <p className="pl-8 pt-8 text-lg">{day.weather[0].main}</p>
+          <p className="pl-8 pt-8 text-lg">{description}</p>
           <p className="pl-8 pt-4 text-4xl">{Math.trunc(tempCelsius)}º</p>
         </div>
-        <MiniIcon weather={day.weather[0].main} />
+        <Details weather={day} mini={true} />
+        {/* {detailed === "miniDetailed" ? <Details weather={day} mini={true} /> : ""} */}
       </div>
 
-      {detailed === "miniDetailed" ? <Details weather={day} mini={true} /> : ""}
+      <MiniIcon weather={day.weather[0].main} />
     </li>
   );
 };

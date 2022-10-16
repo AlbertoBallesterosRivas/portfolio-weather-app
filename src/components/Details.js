@@ -149,7 +149,7 @@ const Details = ({ weather, mini }) => {
   }
 
   return (
-    <ul className="mt-9">
+    <ul className="mt-9 absolute top-[1px] right-[1px]">
       <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
         <p className="flex pl-2">
           <svg

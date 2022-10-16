@@ -1,4 +1,8 @@
-const Header = ({ children }) => {
+import Settings from "./Settings";
+
+const Header = ({ children, language, setLanguage, scale, setScale }) => {
+
+
   return (
     <div className="flex w-full bg-[#005986] h-24 items-center justify-around relative">
       <div className="flex justify-center items-center absolute left-32">
@@ -12,27 +16,8 @@ const Header = ({ children }) => {
 
       <div>{children}</div>
 
-      <div className="flex text-white absolute right-32">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="feather feather-globe"
-          color="white"
-        >
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-        </svg>
-        <span className="border-r border-solid border-white px-2.5">ES</span>
-        <span className="pl-2.5">ºC</span>
-      </div>
+      
+      <Settings language={language} setLanguage={setLanguage} scale={scale} setScale={setScale} />
     </div>
   );
 };

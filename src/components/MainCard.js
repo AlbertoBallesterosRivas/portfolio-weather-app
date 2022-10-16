@@ -1,20 +1,93 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Icon from "./Icon";
 import Details from "./Details";
 
-const MainCard = ({ weather, city }) => {
+const MainCard = ({ weather, city, language, scale }) => {
+  // console.log("weather.weather[0].main", weather.weather[0].main);
+  // console.log("language", language);
   const [detailed, setDetailed] = useState(null);
   const [mouseIn, setMouseIn] = useState(false);
+  const [description, setDescription] = useState(null);
+  const [dateString, setDateString] = useState(null);
+  const date = new Date();
 
+  useEffect(() => {
+    switch (language) {
+      case "ES":
+        switch (weather.weather[0].main) {
+          case "Clear":
+            setDescription("Soleado");
+            break;
+          case "Rain":
+            setDescription("Lluvia");
+            break;
+          case "Clouds":
+            setDescription("Nublado");
+            break;
+          case "Snow":
+            setDescription("Nieve");
+            break;
+          default:
+            setDescription("Soleado");
+        }
+        break;
+      case "EN":
+        switch (weather.weather[0].main) {
+          case "Clear":
+            setDescription("Clear");
+            break;
+          case "Rain":
+            setDescription("Rain");
+            break;
+          case "Clouds":
+            setDescription("Clouds");
+            break;
+          case "Snow":
+            setDescription("Snow");
+            break;
+          default:
+        }
+        break;
+      case "FR":
+        switch (weather.weather[0].main) {
+          case "Clear":
+            setDescription("Ensoleillé");
+            break;
+          case "Rain":
+            setDescription("Pluie");
+            break;
+          case "Clouds":
+            setDescription("Nuageux");
+            break;
+          case "Snow":
+            setDescription("Neige");
+            break;
+          default:
+        }
+        break;
+      default:
+        setDescription(null);
+    }
+    let weekDay = date.toLocaleDateString(language, {
+      weekday: "long",
+    })
+    let month = date.toLocaleDateString(language, {
+      month: "long",
+    })
+    setDateString(`${weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}, ${date.getDate()} ${month}`)
+  }, [language]);
+
+  //
+  // console.log("description", description);
   const tempKevin = weather.main.temp;
   const tempCelsius = tempKevin - 273.15;
 
-  const date = new Date();
-  const dateString = `${date.toLocaleDateString("en-EN", {
-    weekday: "long",
-  })}, ${date.getDate()} ${date.toLocaleDateString("en-EN", {
-    month: "long",
-  })}`;
+  // const date = new Date();
+  // const dateString = `${date.toLocaleDateString("en-EN", {
+  //   weekday: "long",
+  // })}, ${date.getDate()} ${date.toLocaleDateString("en-EN", {
+  //   month: "long",
+  // })}`;
 
   const handleCard = () => {
     if (!detailed || detailed === "backToBasic") {
@@ -43,6 +116,9 @@ const MainCard = ({ weather, city }) => {
     case "Rain":
       cardColor = "from-emerald-500 to-emerald-200";
       break;
+    case "Snow":
+      cardColor = "from-[#284e93] to-[#d0e1fa]";
+      break;
     default:
   }
 
@@ -56,7 +132,7 @@ const MainCard = ({ weather, city }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h1 className="pl-10 pt-6 text-lg">{weather.weather[0].main}</h1>
+      <h1 className="pl-10 pt-6 text-lg">{description}</h1>
       <div className="flex items-center">
         <p className="pl-10 pt-1 text-6xl">{Math.trunc(tempCelsius)}º</p>
 

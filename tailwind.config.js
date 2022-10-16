@@ -8,6 +8,7 @@ module.exports = {
       },
       boxShadow: {
         'clickable': '-1px 0px 14px -3px rgba(19,237,91,1)',
+        'button': '-1px 0px 14px -3px rgb(19 113 237)',
       },
       height: {
         '332': '332px',

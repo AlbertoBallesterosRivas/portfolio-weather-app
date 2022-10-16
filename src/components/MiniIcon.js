@@ -8,13 +8,13 @@ const MiniIcon = ({ weather }) => {
       return <img src={clouds} alt="" />;
     case "Clear":
       return (
-        <div className="w-52 top-[-55px] right-[-66px]">
+        <div className="w-52">
           <img src={sunny} alt="" />
         </div>
       );
     case "Rain":
       return (
-        <div className="w-52 top-[-55px] right-[-66px]">
+        <div className="w-52">
           <img src={rain} alt="" />
         </div>
       );

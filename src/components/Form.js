@@ -1,7 +1,21 @@
 import { useState } from "react";
 import axios from "axios";
 import "../index.css";
-const Form = ({ setCity, city, setWeather, setForecast, setNotification, setCityForCard }) => {
+
+const Form = ({ setCity, city, setWeather, setForecast, setNotification, setCityForCard, language }) => {
+  let placeholder = null;
+  switch (language) {
+    case "ES":
+      placeholder = "Buscar ciudad";
+      break;
+    case "EN":
+      placeholder = "Search city";
+      break;
+    case "FR":
+      placeholder = "Recherche de ville";
+      break;
+    default:
+  }
 
   const handleCityChange = (event) => {
     setCity(event.target.value);
@@ -51,7 +65,7 @@ const Form = ({ setCity, city, setWeather, setForecast, setNotification, setCity
           onChange={handleCityChange}
           value={city}
           type="text"
-          placeholder="Buscar ciudad"
+          placeholder={placeholder}
           className="w-96	h-9 rounded-full bg-[#337a9e] text-center text-white"
         />
         <svg

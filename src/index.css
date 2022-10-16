@@ -55,7 +55,7 @@ input::-ms-input-placeholder {
 .miniDetailed {
   width: 332px;
   animation-name: miniBasicToDetailed;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
 }
 
 @keyframes miniDetailedToBasic {
@@ -74,4 +74,9 @@ input::-ms-input-placeholder {
 }
 .capitalize-first::first-letter {
   text-transform: uppercase;
+}
+
+.selected {
+  color: rgb(255 255 255);
+  background-color: #1b4de4;
 }
