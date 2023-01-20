@@ -9,7 +9,20 @@ const MainCard = ({ weather, city, language, scale }) => {
   const [mouseIn, setMouseIn] = useState(false);
   const [description, setDescription] = useState(null);
   const [dateString, setDateString] = useState(null);
+  const [temperature, setTemperature] = useState(null);
   const date = new Date();
+
+  useEffect(() => {
+    switch (scale) {
+      case "ºF":
+        setTemperature(1.8 * (weather.main.temp - 273.15) + 32);
+        break;
+      case "ºC":
+        setTemperature(weather.main.temp - 273.15);
+        break;
+      default:
+    }
+  }, [scale]);
 
   useEffect(() => {
     switch (language) {
@@ -70,24 +83,16 @@ const MainCard = ({ weather, city, language, scale }) => {
     }
     let weekDay = date.toLocaleDateString(language, {
       weekday: "long",
-    })
+    });
     let month = date.toLocaleDateString(language, {
       month: "long",
-    })
-    setDateString(`${weekDay.charAt(0).toUpperCase() + weekDay.slice(1)}, ${date.getDate()} ${month}`)
+    });
+    setDateString(
+      `${
+        weekDay.charAt(0).toUpperCase() + weekDay.slice(1)
+      }, ${date.getDate()} ${month}`
+    );
   }, [language]);
-
-  //
-  // console.log("description", description);
-  const tempKevin = weather.main.temp;
-  const tempCelsius = tempKevin - 273.15;
-
-  // const date = new Date();
-  // const dateString = `${date.toLocaleDateString("en-EN", {
-  //   weekday: "long",
-  // })}, ${date.getDate()} ${date.toLocaleDateString("en-EN", {
-  //   month: "long",
-  // })}`;
 
   const handleCard = () => {
     if (!detailed || detailed === "backToBasic") {
@@ -134,7 +139,9 @@ const MainCard = ({ weather, city, language, scale }) => {
     >
       <h1 className="pl-10 pt-6 text-lg">{description}</h1>
       <div className="flex items-center">
-        <p className="pl-10 pt-1 text-6xl">{Math.trunc(tempCelsius)}º</p>
+        <p className="pl-10 pt-1 text-6xl" title="Temperature">
+          {Math.trunc(temperature)}º
+        </p>
 
         <div className="mx-8">
           <div className="w-px h-6 bg-gradient-to-t from-white to-transparent"></div>

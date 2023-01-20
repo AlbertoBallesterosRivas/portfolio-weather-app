@@ -4,7 +4,7 @@ import MainCard from "./MainCard";
 import MiniCard from "./MiniCard";
 
 const Weather = ({ weather, city, forecast, language, scale }) => {
-  const [opened, setOpened] = useState(null)
+  const [opened, setOpened] = useState(null);
 
   if (!weather || !forecast) {
     return null;
@@ -62,11 +62,23 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   );
 
   return (
-    <div className="flex flex-col	items-center mt-16 w-3/4">
-      <MainCard weather={weather} city={city} language={language} scale={scale} />
+    <div className="flex flex-col	items-center mt-4 w-3/4">
+      <MainCard
+        weather={weather}
+        city={city}
+        language={language}
+        scale={scale}
+      />
       <ul className="flex flex-wrap justify-between mt-10">
         {nextDays.map((day) => (
-          <MiniCard day={day} key={day.dt_tx} opened={opened} setOpened={setOpened} language={language} scale={scale} />
+          <MiniCard
+            day={day}
+            key={day.dt_tx}
+            opened={opened}
+            setOpened={setOpened}
+            language={language}
+            scale={scale}
+          />
         ))}
       </ul>
     </div>

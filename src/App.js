@@ -25,14 +25,15 @@ const App = () => {
       const key = process.env.REACT_APP_API_KEY;
       let lat = null;
       let lon = null;
-      console.log("cityForCard pre axios", cityForCard)
+      console.log("cityForCard pre axios", cityForCard);
       axios
         .get(
-          
-          `http://api.openweathermap.org/data/2.5/weather?q=${data[Math.floor(Math.random() * 200)].capital}&appid=${key}&units=metric`
+          `http://api.openweathermap.org/data/2.5/weather?q=${
+            data[Math.floor(Math.random() * 200)].capital
+          }&appid=${key}&units=metric`
         )
         .then(({ data }) => {
-          console.log("cityForCard then", cityForCard)
+          console.log("cityForCard then", cityForCard);
           console.log("weather", data);
           lat = data.coord.lat;
           lon = data.coord.lon;
@@ -50,7 +51,11 @@ const App = () => {
         })
         .catch((error) => {
           console.log("fail");
-          setNotification(`No hay resultados de ${data[Math.floor(Math.random() * 200)].capital}`);
+          setNotification(
+            `No hay resultados de ${
+              data[Math.floor(Math.random() * 200)].capital
+            }`
+          );
         });
     });
   };
@@ -92,29 +97,38 @@ const App = () => {
       });
   }, []);
   return (
-    <div className="backgroundClouds absolute w-full h-full">
-      <Header
-        language={language}
-        setLanguage={setLanguage}
-        scale={scale}
-        setScale={setScale}
-      >
-        <Form
-          setCity={setCity}
-          city={city}
-          setWeather={setWeather}
-          setForecast={setForecast}
-          setNotification={setNotification}
-          setCityForCard={setCityForCard}
+    <div className="backgroundClouds absolute w-full h-full flex flex-col">
+      <div className="flex-[1_0_auto]">
+        <Header
           language={language}
-        />
-      </Header>
-      <NewCityButton getNewCity={getNewCity} language={language} />
-      <div className="flex flex-col items-center ">
-        <Notification message={notification} />
-        <Weather weather={weather} city={cityForCard} forecast={forecast} language={language} scale={scale} />
+          setLanguage={setLanguage}
+          scale={scale}
+          setScale={setScale}
+        >
+          <Form
+            setCity={setCity}
+            city={city}
+            setWeather={setWeather}
+            setForecast={setForecast}
+            setNotification={setNotification}
+            setCityForCard={setCityForCard}
+            language={language}
+          />
+        </Header>
+        <NewCityButton getNewCity={getNewCity} language={language} />
+        <div className="flex flex-col items-center ">
+          <Notification message={notification} />
+          <Weather
+            weather={weather}
+            city={cityForCard}
+            forecast={forecast}
+            language={language}
+            scale={scale}
+          />
+        </div>
       </div>
-      {/* <Footer /> */}
+
+      <Footer />
     </div>
   );
 };

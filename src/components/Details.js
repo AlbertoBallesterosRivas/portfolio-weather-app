@@ -1,4 +1,12 @@
-const Details = ({ weather, mini }) => {
+import { useState, useEffect } from "react";
+
+const Details = ({ weather, mini, language }) => {
+  console.log("weather", weather);
+  const [detailsStrings, setDetailsStrings] = useState({
+    humidity: "Humedad",
+    visibility: "Visibilidad",
+    wind: "Viento",
+  });
   console.log("details", weather);
   let windDirection = null;
   const degrees = weather.wind.deg;
@@ -148,9 +156,46 @@ const Details = ({ weather, mini }) => {
     );
   }
 
+  useEffect(() => {
+    switch (language) {
+      case "ES":
+        setDetailsStrings({
+          humidity: "Humedad",
+          visibility: "Visibilidad",
+          wind: "Viento",
+        });
+        break;
+      case "EN":
+        setDetailsStrings({
+          humidity: "Humidity",
+          visibility: "Visibility",
+          wind: "Wind",
+        });
+
+        break;
+      case "FR":
+        setDetailsStrings({
+          humidity: "Humidité",
+          visibility: "Visibilité",
+          wind: "Vent",
+        });
+        break;
+      default:
+        setDetailsStrings({
+          humidity: "Humedad",
+          visibility: "Visibilidad",
+          wind: "Viento",
+        });
+    }
+  }, [language]);
+
   return (
-    <ul className="mt-9 absolute top-[1px] right-[1px]">
-      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
+    <ul className="mt-9 w-1/2">
+      <li
+        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
+          mini ? "w-max" : ""
+        }`}
+      >
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -169,11 +214,15 @@ const Details = ({ weather, mini }) => {
           <span className="pl-2">Max./Min.</span>
         </p>
         <span>
-          {Math.trunc(weather.main.temp_min)}º/
-          {Math.trunc(weather.main.temp_max)}º
+          {Math.trunc(weather.main.temp_min - 273.15)}º/
+          {Math.trunc(weather.main.temp_max - 273.15)}º
         </span>
       </li>
-      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
+      <li
+        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
+          mini ? "w-max" : ""
+        }`}
+      >
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -187,20 +236,59 @@ const Details = ({ weather, mini }) => {
             stroke-linejoin="round"
             class="feather feather-droplet"
           >
+            <title>Pressure</title>
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
           </svg>
-          <span className="pl-2">Humedad</span>
+          <span className="pl-2">{detailsStrings.humidity}</span>
         </p>
         <span>{weather.main.humidity}%</span>
       </li>
-      {/* <li className="flex w-1/3 border-y border-solid border-grey justify-between">
-            <p className="flex">
+      <li className="flex w-auto border-y border-solid border-grey justify-between items-center">
+        <div className="flex items-center pl-2">
+          <div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-arrow-down"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-arrow-up"
+            >
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </div>
 
-                <span>Presión</span>
-            </p>
-          <span>{weather.main.pressure}mb</span> 
-        </li> */}
-      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
+          <p className="pl-2">
+            <span>Presión</span>
+          </p>
+        </div>
+        <span>{weather.main.pressure}mb</span>
+      </li>
+      <li
+        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
+          mini ? "w-max" : ""
+        }`}
+      >
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -217,11 +305,15 @@ const Details = ({ weather, mini }) => {
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
             <circle cx="12" cy="12" r="3"></circle>
           </svg>
-          <span className="pl-2">Visibilidad</span>
+          <span className="pl-2">{detailsStrings.visibility}</span>
         </p>
         <span>{weather.visibility}m</span>
       </li>
-      <li className={`flex w-1/3 border-t border-solid border-grey justify-between py-2.5 ${mini ? "w-max" : ""}`}>
+      <li
+        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
+          mini ? "w-max" : ""
+        }`}
+      >
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -237,10 +329,10 @@ const Details = ({ weather, mini }) => {
           >
             <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
           </svg>
-          <span className="pl-2">Viento</span>
+          <span className="pl-2">{detailsStrings.wind}</span>
         </p>
         <p className="flex">
-          {windDirection} 
+          {windDirection}
           <span className="ml-1">{weather.wind.speed} km/h</span>
         </p>
       </li>

@@ -5,7 +5,11 @@ import rain from "./rain.png";
 const MiniIcon = ({ weather }) => {
   switch (weather) {
     case "Clouds":
-      return <img src={clouds} alt="" />;
+      return (
+        <div className="w-52 max-w-52">
+          <img src={clouds} alt="" />;
+        </div>
+      );
     case "Clear":
       return (
         <div className="w-52">

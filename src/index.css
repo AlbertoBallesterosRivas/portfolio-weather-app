@@ -80,3 +80,7 @@ input::-ms-input-placeholder {
   color: rgb(255 255 255);
   background-color: #1b4de4;
 }
+
+.white-svg{
+  filter: invert(100%) sepia(0%) saturate(7470%) hue-rotate(62deg) brightness(102%) contrast(105%);
+}
