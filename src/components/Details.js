@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
 
-const Details = ({ weather, mini, language }) => {
-  console.log("weather", weather);
+const Details = ({ weather, mini, language, detailed }) => {
   const [detailsStrings, setDetailsStrings] = useState({
     humidity: "Humedad",
     visibility: "Visibilidad",
     wind: "Viento",
   });
-  console.log("details", weather);
+
   let windDirection = null;
   const degrees = weather.wind.deg;
   if (degrees <= 22 && degrees >= 338) {
@@ -19,10 +18,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-up"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-up"
       >
         <line x1="12" y1="19" x2="12" y2="5"></line>
         <polyline points="5 12 12 5 19 12"></polyline>
@@ -37,10 +36,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-up-right"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-up-right"
       >
         <line x1="7" y1="17" x2="17" y2="7"></line>
         <polyline points="7 7 17 7 17 17"></polyline>
@@ -55,10 +54,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-right"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-right"
       >
         <line x1="5" y1="12" x2="19" y2="12"></line>
         <polyline points="12 5 19 12 12 19"></polyline>
@@ -73,10 +72,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-down-right"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-down-right"
       >
         <line x1="7" y1="7" x2="17" y2="17"></line>
         <polyline points="17 7 17 17 7 17"></polyline>
@@ -91,10 +90,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-down"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-down"
       >
         <line x1="12" y1="5" x2="12" y2="19"></line>
         <polyline points="19 12 12 19 5 12"></polyline>
@@ -109,10 +108,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-down-left"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-down-left"
       >
         <line x1="17" y1="7" x2="7" y2="17"></line>
         <polyline points="17 17 7 17 7 7"></polyline>
@@ -127,10 +126,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-left"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-left"
       >
         <line x1="19" y1="12" x2="5" y2="12"></line>
         <polyline points="12 19 5 12 12 5"></polyline>
@@ -145,10 +144,10 @@ const Details = ({ weather, mini, language }) => {
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="feather feather-arrow-up-left"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="feather feather-arrow-up-left"
       >
         <line x1="17" y1="17" x2="7" y2="7"></line>
         <polyline points="7 17 7 7 17 7"></polyline>
@@ -190,12 +189,12 @@ const Details = ({ weather, mini, language }) => {
   }, [language]);
 
   return (
-    <ul className="mt-9 w-1/2">
-      <li
-        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
-          mini ? "w-max" : ""
-        }`}
-      >
+    <ul
+      className={`mt-9  ${mini ? "absolute left-[177px] w-3/4" : "w-1/2"} ${
+        detailed === "miniDetailed" ? "detailsAppear" : ""
+      } ${detailed === "miniBackToBasic" ? "detailsDisappear" : ""}`}
+    >
+      <li className={`flex w-full justify-between py-2.5`}>
         <p className="flex pl-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -204,10 +203,10 @@ const Details = ({ weather, mini, language }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-thermometer"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-thermometer"
           >
             <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
           </svg>
@@ -219,9 +218,7 @@ const Details = ({ weather, mini, language }) => {
         </span>
       </li>
       <li
-        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
-          mini ? "w-max" : ""
-        }`}
+        className={`flex w-full border-t border-solid border-grey justify-between py-2.5`}
       >
         <p className="flex pl-2">
           <svg
@@ -231,19 +228,19 @@ const Details = ({ weather, mini, language }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-droplet"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-droplet"
           >
-            <title>Pressure</title>
+            <title>Humidity</title>
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
           </svg>
           <span className="pl-2">{detailsStrings.humidity}</span>
         </p>
         <span>{weather.main.humidity}%</span>
       </li>
-      <li className="flex w-auto border-y border-solid border-grey justify-between items-center">
+      <li className="flex w-full border-t border-solid border-grey justify-between items-center">
         <div className="flex items-center pl-2">
           <div>
             <svg
@@ -253,10 +250,10 @@ const Details = ({ weather, mini, language }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-arrow-down"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-arrow-down"
             >
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <polyline points="19 12 12 19 5 12"></polyline>
@@ -268,10 +265,10 @@ const Details = ({ weather, mini, language }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-arrow-up"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-arrow-up"
             >
               <line x1="12" y1="19" x2="12" y2="5"></line>
               <polyline points="5 12 12 5 19 12"></polyline>
@@ -285,9 +282,7 @@ const Details = ({ weather, mini, language }) => {
         <span>{weather.main.pressure}mb</span>
       </li>
       <li
-        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
-          mini ? "w-max" : ""
-        }`}
+        className={`flex w-full border-t border-solid border-grey justify-between py-2.5`}
       >
         <p className="flex pl-2">
           <svg
@@ -297,10 +292,10 @@ const Details = ({ weather, mini, language }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-eye"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-eye"
           >
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
             <circle cx="12" cy="12" r="3"></circle>
@@ -310,9 +305,7 @@ const Details = ({ weather, mini, language }) => {
         <span>{weather.visibility}m</span>
       </li>
       <li
-        className={`flex w-auto border-t border-solid border-grey justify-between py-2.5 ${
-          mini ? "w-max" : ""
-        }`}
+        className={`flex w-full border-t border-solid border-grey justify-between py-2.5`}
       >
         <p className="flex pl-2">
           <svg
@@ -322,10 +315,10 @@ const Details = ({ weather, mini, language }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="feather feather-wind"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-wind"
           >
             <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
           </svg>

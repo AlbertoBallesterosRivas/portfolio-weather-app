@@ -1,8 +1,6 @@
 import Settings from "./Settings";
 
 const Header = ({ children, language, setLanguage, scale, setScale }) => {
-
-
   return (
     <div className="flex w-full bg-[#005986] h-24 items-center justify-around relative">
       <div className="flex justify-center items-center absolute left-32">
@@ -16,8 +14,12 @@ const Header = ({ children, language, setLanguage, scale, setScale }) => {
 
       <div>{children}</div>
 
-      
-      <Settings language={language} setLanguage={setLanguage} scale={scale} setScale={setScale} />
+      <Settings
+        language={language}
+        setLanguage={setLanguage}
+        scale={scale}
+        setScale={setScale}
+      />
     </div>
   );
 };

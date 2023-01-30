@@ -7,7 +7,7 @@ const Icon = ({ weather }) => {
   switch (weather) {
     case "Clouds":
       return (
-        <div className="absolute w-52 top-[-55px] right-[-66px]">
+        <div className="absolute w-[21rem] top-[-54px] right-[-134px]">
           <img src={clouds} alt="" />
         </div>
       );
@@ -26,7 +26,7 @@ const Icon = ({ weather }) => {
     default:
     case "Snow":
       return (
-        <div className="absolute w-52 top-[-55px] right-[-66px]">
+        <div className="absolute w-52 top-[-40px] right-[-55px]">
           <img src={snow} alt="" />
         </div>
       );

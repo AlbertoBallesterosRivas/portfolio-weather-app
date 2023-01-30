@@ -4,8 +4,6 @@ const SettingsSelect = ({
   currentLanguage,
   setLanguage,
 }) => {
-  console.log("currentScale", currentScale);
-  console.log("currentLanguage", currentLanguage);
   const handleEsclick = () => {
     setLanguage("ES");
   };
@@ -29,29 +27,45 @@ const SettingsSelect = ({
   return (
     <div className="flex absolute bottom-[-62px] right-[-90px] bg-white text-blue-600 rounded-full settings">
       <div className="border rounded-full">
-        <span onClick={handleFclick} className={`px-4 rounded-full ${currentScale === "ºF" ? "selected" : ""}`}>
+        <span
+          onClick={handleFclick}
+          className={`px-4 rounded-full ${
+            currentScale === "ºF" ? "selected" : ""
+          }`}
+        >
           ºF
         </span>
-        <span onClick={handleCclick} className={`px-4 rounded-full ${currentScale === "ºC" ? "selected" : ""}`}>
+        <span
+          onClick={handleCclick}
+          className={`px-4 rounded-full ${
+            currentScale === "ºC" ? "selected" : ""
+          }`}
+        >
           ºC
         </span>
       </div>
       <div className="border rounded-full ml-1.5">
         <span
           onClick={handleEsclick}
-          className={`px-4 rounded-full ${currentLanguage === "ES" ? "selected" : ""}`}
+          className={`px-4 rounded-full ${
+            currentLanguage === "ES" ? "selected" : ""
+          }`}
         >
           ES
         </span>
         <span
           onClick={handleEnclick}
-          className={`px-4 rounded-full ${currentLanguage === "EN" ? "selected" : ""}`}
+          className={`px-4 rounded-full ${
+            currentLanguage === "EN" ? "selected" : ""
+          }`}
         >
           EN
         </span>
         <span
           onClick={handleFrclick}
-          className={`px-4 rounded-full ${currentLanguage === "FR" ? "selected" : ""}`}
+          className={`px-4 rounded-full ${
+            currentLanguage === "FR" ? "selected" : ""
+          }`}
         >
           FR
         </span>

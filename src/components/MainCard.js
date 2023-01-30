@@ -3,8 +3,6 @@ import Icon from "./Icon";
 import Details from "./Details";
 
 const MainCard = ({ weather, city, language, scale }) => {
-  // console.log("weather.weather[0].main", weather.weather[0].main);
-  // console.log("language", language);
   const [detailed, setDetailed] = useState(null);
   const [mouseIn, setMouseIn] = useState(false);
   const [description, setDescription] = useState(null);
@@ -22,7 +20,7 @@ const MainCard = ({ weather, city, language, scale }) => {
         break;
       default:
     }
-  }, [scale]);
+  }, [weather, scale]);
 
   useEffect(() => {
     switch (language) {
@@ -92,7 +90,7 @@ const MainCard = ({ weather, city, language, scale }) => {
         weekDay.charAt(0).toUpperCase() + weekDay.slice(1)
       }, ${date.getDate()} ${month}`
     );
-  }, [language]);
+  }, [language, weather]);
 
   const handleCard = () => {
     if (!detailed || detailed === "backToBasic") {
@@ -158,10 +156,10 @@ const MainCard = ({ weather, city, language, scale }) => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-map-pin"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="feather feather-map-pin"
             >
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
               <circle cx="12" cy="10" r="3"></circle>
@@ -172,8 +170,7 @@ const MainCard = ({ weather, city, language, scale }) => {
       </div>
 
       <Icon weather={weather.weather[0].main} />
-
-      {detailed === "detailed" ? <Details weather={weather} /> : ""}
+      <Details weather={weather} mini={false} language={language} />
     </div>
   );
 };

@@ -18,7 +18,9 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   const tomorrowFormatted = `${tomorrow.getFullYear()}-${tomorrowFormattedMonth.padStart(
     2,
     "0"
-  )}-${tomorrow.getDate()} 12:00:00`;
+  )}-${
+    tomorrow.getDate() < 10 ? "0" + tomorrow.getDate() : tomorrow.getDate()
+  } 12:00:00`;
 
   let thirdDay = new Date();
   thirdDay.setDate(today.getDate() + 2);
@@ -26,7 +28,9 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   const thirdDayFormatted = `${thirdDay.getFullYear()}-${thirdDayFormattedMonth.padStart(
     2,
     "0"
-  )}-${thirdDay.getDate()} 12:00:00`;
+  )}-${
+    thirdDay.getDate() < 10 ? "0" + thirdDay.getDate() : thirdDay.getDate()
+  } 12:00:00`;
 
   let fourthDay = new Date();
   fourthDay.setDate(today.getDate() + 3);
@@ -34,7 +38,9 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   const fourthDayFormatted = `${fourthDay.getFullYear()}-${fourthDayFormattedMoth.padStart(
     2,
     "0"
-  )}-${fourthDay.getDate()} 12:00:00`;
+  )}-${
+    fourthDay.getDate() < 10 ? "0" + fourthDay.getDate() : fourthDay.getDate()
+  } 12:00:00`;
 
   let fifthDay = new Date();
   fifthDay.setDate(today.getDate() + 4);
@@ -42,7 +48,9 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   const fifthDayFormatted = `${fifthDay.getFullYear()}-${fifthDayFormattedMoth.padStart(
     2,
     "0"
-  )}-${fifthDay.getDate()} 12:00:00`;
+  )}-${
+    fifthDay.getDate() < 10 ? "0" + fifthDay.getDate() : fifthDay.getDate()
+  } 12:00:00`;
 
   let sixthDay = new Date();
   sixthDay.setDate(today.getDate() + 5);
@@ -50,16 +58,26 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   const sixthDayFormatted = `${sixthDay.getFullYear()}-${sixthDayFormattedMoth.padStart(
     2,
     "0"
-  )}-${sixthDay.getDate()} 00:00:00`;
+  )}-${
+    sixthDay.getDate() < 10 ? "0" + sixthDay.getDate() : sixthDay.getDate()
+  } 00:00:00`;
 
-  const nextDays = forecast.filter(
-    (element) =>
-      element.dt_txt === tomorrowFormatted ||
-      element.dt_txt === thirdDayFormatted ||
-      element.dt_txt === fourthDayFormatted ||
-      element.dt_txt === fifthDayFormatted ||
-      element.dt_txt === sixthDayFormatted
+  let firstDay = forecast.find((element) =>
+    element.dt_txt.includes(tomorrowFormatted)
   );
+  let secondtDay = forecast.find((element) =>
+    element.dt_txt.includes(thirdDayFormatted)
+  );
+  let thirdDay2 = forecast.find((element) =>
+    element.dt_txt.includes(fourthDayFormatted)
+  );
+  let fourthDay2 = forecast.find((element) =>
+    element.dt_txt.includes(fifthDayFormatted)
+  );
+  let fifthDay2 = forecast.find((element) =>
+    element.dt_txt.includes(sixthDayFormatted)
+  );
+  const nextDays = [firstDay, secondtDay, thirdDay2, fourthDay2, fifthDay2];
 
   return (
     <div className="flex flex-col	items-center mt-4 w-3/4">
@@ -69,11 +87,11 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
         language={language}
         scale={scale}
       />
-      <ul className="flex flex-wrap justify-between mt-10">
+      <ul className="flex flex-wrap justify-between mt-10 mb-10">
         {nextDays.map((day) => (
           <MiniCard
             day={day}
-            key={day.dt_tx}
+            key={day.dt}
             opened={opened}
             setOpened={setOpened}
             language={language}

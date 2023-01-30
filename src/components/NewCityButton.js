@@ -30,7 +30,9 @@ const NewCityButton = ({ getNewCity, language }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={getNewCity}
-      className={`flex items-center bg-[#1b4de4] text-[#fffffb] rounded-full ml-6 mt-6 ${mouseIn ? "shadow-button" : ""}`}
+      className={`flex items-center bg-[#1b4de4] text-[#fffffb] rounded-full ml-6 mt-6 ${
+        mouseIn ? "shadow-button" : ""
+      }`}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

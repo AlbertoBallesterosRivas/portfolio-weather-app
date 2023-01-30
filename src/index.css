@@ -27,17 +27,17 @@ input::-ms-input-placeholder {
 
 @keyframes basicToDetailed {
   from {height: 160px}
-  to {height: 332px;}
+  to {height: 24rem;}
 }
 
 .detailed {
-  height: 332px;
+  height: 24rem;
   animation-name: basicToDetailed;
   animation-duration: 1.5s;
 }
 
 @keyframes DetailedToBasic {
-  from {height: 332px}
+  from {height: 24rem}
   to {height: 160px;}
 }
 
@@ -48,7 +48,7 @@ input::-ms-input-placeholder {
 }
 
 @keyframes miniBasicToDetailed {
-  from {width: 160px}
+  from {width: 11rem}
   to {width: 332px;}
 }
 
@@ -60,11 +60,11 @@ input::-ms-input-placeholder {
 
 @keyframes miniDetailedToBasic {
   from {width: 332px}
-  to {width: 160px;}
+  to {width: 11rem;}
 }
 
 .miniBackToBasic {
-  width: 160px;
+  width: 11rem;
   animation-name: miniDetailedToBasic;
   animation-duration: 1.5s;
 }
@@ -83,4 +83,47 @@ input::-ms-input-placeholder {
 
 .white-svg{
   filter: invert(100%) sepia(0%) saturate(7470%) hue-rotate(62deg) brightness(102%) contrast(105%);
+}
+
+.detailsAppear{
+  animation-name: detailsAppear;
+  animation-duration: 1.5s;
+  left: 81px;
+}
+
+@keyframes detailsAppear {
+  from {left: 177px}
+  to {left: 81px;}
+}
+
+.detailsDisappear{
+  animation-name: detailsDisappear;
+  animation-duration: 1.5s;
+}
+
+@keyframes detailsDisappear {
+  from {left: 81px}
+  to {left: 177px;}
+}
+
+.iconMovesLeft{
+  animation-name: iconMovesLeft;
+  animation-duration: 1.5s;
+  left: -85px;
+}
+
+@keyframes iconMovesLeft {
+  from {left: 0.5rem}
+  to {left: -85px;}
+}
+
+.iconMovesRight{
+  animation-name: iconMovesRight;
+  animation-duration: 1.5s;
+  left: 0.5rem;
+}
+
+@keyframes iconMovesRight {
+  from {left: -85px}
+  to {left: 0.5rem;}
 }
