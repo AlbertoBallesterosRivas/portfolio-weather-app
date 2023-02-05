@@ -1,11 +1,19 @@
 import { useState, useEffect } from "react";
+import useBreakpoints from "./useBreakPoints";
 
 const Details = ({ weather, mini, language, detailed }) => {
   const [detailsStrings, setDetailsStrings] = useState({
     humidity: "Humedad",
     visibility: "Visibilidad",
     wind: "Viento",
+    pressure: "Presión",
   });
+
+  const { isXs, isSm, isMd } = useBreakpoints();
+  let width = null
+  if (isSm || isMd) width = "w-[50%]";
+  else if (isXs) width = "w-full";
+  else width = "w-[40%]";
 
   let windDirection = null;
   const degrees = weather.wind.deg;
@@ -162,6 +170,7 @@ const Details = ({ weather, mini, language, detailed }) => {
           humidity: "Humedad",
           visibility: "Visibilidad",
           wind: "Viento",
+          pressure: "Presión",
         });
         break;
       case "EN":
@@ -169,6 +178,7 @@ const Details = ({ weather, mini, language, detailed }) => {
           humidity: "Humidity",
           visibility: "Visibility",
           wind: "Wind",
+          pressure: "Pressure",
         });
 
         break;
@@ -177,6 +187,7 @@ const Details = ({ weather, mini, language, detailed }) => {
           humidity: "Humidité",
           visibility: "Visibilité",
           wind: "Vent",
+          pressure: "Pression",
         });
         break;
       default:
@@ -190,7 +201,7 @@ const Details = ({ weather, mini, language, detailed }) => {
 
   return (
     <ul
-      className={`mt-9  ${mini ? "absolute left-[177px] w-3/4" : "w-1/2"} ${
+      className={`mt-9  ${mini ? "absolute left-[190px] w-2/3" : width} ${
         detailed === "miniDetailed" ? "detailsAppear" : ""
       } ${detailed === "miniBackToBasic" ? "detailsDisappear" : ""}`}
     >
@@ -276,7 +287,7 @@ const Details = ({ weather, mini, language, detailed }) => {
           </div>
 
           <p className="pl-2">
-            <span>Presión</span>
+            <span>{detailsStrings.pressure}</span>
           </p>
         </div>
         <span>{weather.main.pressure}mb</span>

@@ -19,15 +19,15 @@ const App = () => {
 
   const getNewCity = () => {
     axios.get("https://restcountries.com/v3.1/all").then(({ data }) => {
-      setCityForCard(data[Math.floor(Math.random() * 200)].capital);
+      let capital = data[Math.floor(Math.random() * 200)].capital;
+
+      setCity("");
       const key = process.env.REACT_APP_API_KEY;
       let lat = null;
       let lon = null;
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${
-            data[Math.floor(Math.random() * 200)].capital
-          }&appid=${key}&units=metric`
+          `http://api.openweathermap.org/data/2.5/weather?q=${capital}&appid=${key}&units=metric`
         )
         .then(({ data }) => {
           lat = data.coord.lat;
@@ -39,16 +39,13 @@ const App = () => {
               `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
             )
             .then(({ data }) => {
+              setCityForCard(capital);
               setWeather(data.list[0]);
               setForecast(data.list);
             });
         })
         .catch((error) => {
-          setNotification(
-            `No hay resultados de ${
-              data[Math.floor(Math.random() * 200)].capital
-            }`
-          );
+          setNotification(`No hay resultados de ${capital}`);
         });
     });
   };
@@ -79,7 +76,8 @@ const App = () => {
       .catch((error) => {
         setNotification(`No hay resultados de ${cityForCard}`);
       });
-  }, [cityForCard]);
+  }, []);
+
   return (
     <div className="backgroundClouds absolute w-full h-full flex flex-col">
       <div className="flex-[1_0_auto]">

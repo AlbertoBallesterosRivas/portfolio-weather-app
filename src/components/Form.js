@@ -33,13 +33,13 @@ const Form = ({
     const key = process.env.REACT_APP_API_KEY;
     let lat = null;
     let lon = null;
-    setCityForCard(city);
 
     axios
       .get(
         `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}&units=metric`
       )
       .then(({ data }) => {
+        setCityForCard(city);
         lat = data.coord.lat;
         lon = data.coord.lon;
 
@@ -66,7 +66,7 @@ const Form = ({
           value={city}
           type="text"
           placeholder={placeholder}
-          className="w-96	h-9 rounded-full bg-[#337a9e] text-center text-white"
+          className="w-full	h-9 rounded-full bg-[#337a9e] text-center text-white"
         />
         <svg
           onClick={handleSubmit}

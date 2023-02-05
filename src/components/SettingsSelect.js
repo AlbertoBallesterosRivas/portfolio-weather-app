@@ -1,9 +1,18 @@
+import useBreakpoints from "./useBreakPoints";
+
 const SettingsSelect = ({
   currentScale,
   setScale,
   currentLanguage,
   setLanguage,
 }) => {
+  const { isXs, isSm, isMd } = useBreakpoints();
+  let right = null
+  if (isMd) right = "right-[105px]"
+  else if (isSm) right = "right-[70px]"
+  else if (isXs) right = ""
+  else right = "right-[160px]"
+  
   const handleEsclick = () => {
     setLanguage("ES");
   };
@@ -25,7 +34,7 @@ const SettingsSelect = ({
   };
 
   return (
-    <div className="flex absolute bottom-[-62px] right-[-90px] bg-white text-blue-600 rounded-full settings">
+    <div className={`flex absolute bottom-[-62px] ${right} bg-white text-blue-600 rounded-full settings`}>
       <div className="border rounded-full">
         <span
           onClick={handleFclick}

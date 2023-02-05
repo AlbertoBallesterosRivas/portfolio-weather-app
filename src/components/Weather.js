@@ -2,10 +2,11 @@ import { useState } from "react";
 import "../index.css";
 import MainCard from "./MainCard";
 import MiniCard from "./MiniCard";
+import useBreakpoints from "./useBreakPoints";
 
 const Weather = ({ weather, city, forecast, language, scale }) => {
   const [opened, setOpened] = useState(null);
-
+  const { isXs, isSm, isMd } = useBreakpoints();
   if (!weather || !forecast) {
     return null;
   }
@@ -14,6 +15,7 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
 
   let tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
+  console.log("TOMOTTRRO", tomorrow);
   const tomorrowFormattedMonth = `${tomorrow.getMonth() + 1}`;
   const tomorrowFormatted = `${tomorrow.getFullYear()}-${tomorrowFormattedMonth.padStart(
     2,
@@ -77,21 +79,62 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
   let fifthDay2 = forecast.find((element) =>
     element.dt_txt.includes(sixthDayFormatted)
   );
-  const nextDays = [firstDay, secondtDay, thirdDay2, fourthDay2, fifthDay2];
+  const nextDays = [
+    { weather: firstDay, date: tomorrow },
+    { weather: secondtDay, date: thirdDay },
+    { weather: thirdDay2, date: fourthDay },
+    { weather: fourthDay2, date: fifthDay },
+    { weather: fifthDay2, date: sixthDay },
+  ];
 
+  if (isXs || isSm || isMd) {
+    return (
+      <div className="flex flex-col	items-center mt-4 w-full">
+        <MainCard
+          weather={weather}
+          date={today}
+          city={city}
+          language={language}
+          scale={scale}
+        />
+        <ul
+          className={`flex flex-wrap justify-center items-center mt-10 mb-10 w-full ${
+            isXs || isSm || isMd ? "flex-col" : ""
+          }`}
+        >
+          {nextDays.map((day) => (
+            <MainCard
+              weather={day.weather}
+              date={day.date}
+              key={day.weather.dt}
+              opened={opened}
+              setOpened={setOpened}
+              language={language}
+              scale={scale}
+            />
+          ))}
+        </ul>
+      </div>
+    );
+  }
   return (
-    <div className="flex flex-col	items-center mt-4 w-3/4">
+    <div className="flex flex-col	items-center mt-4 w-full">
       <MainCard
         weather={weather}
+        date={today}
         city={city}
         language={language}
         scale={scale}
       />
-      <ul className="flex flex-wrap justify-between mt-10 mb-10">
+      <ul
+        className={`flex flex-wrap justify-center mt-10 mb-10 w-full ${
+          isXs || isSm || isMd ? "flex-col" : ""
+        }`}
+      >
         {nextDays.map((day) => (
           <MiniCard
-            day={day}
-            key={day.dt}
+            day={day.weather}
+            key={day.weather.dt}
             opened={opened}
             setOpened={setOpened}
             language={language}

@@ -48,7 +48,7 @@ input::-ms-input-placeholder {
 }
 
 @keyframes miniBasicToDetailed {
-  from {width: 11rem}
+  from {width: 10%}
   to {width: 332px;}
 }
 
@@ -60,11 +60,12 @@ input::-ms-input-placeholder {
 
 @keyframes miniDetailedToBasic {
   from {width: 332px}
-  to {width: 11rem;}
+  to {width: 10%;}
 }
 
 .miniBackToBasic {
-  width: 11rem;
+  /* width: 11rem; */
+  width: 10%;
   animation-name: miniDetailedToBasic;
   animation-duration: 1.5s;
 }
@@ -88,12 +89,12 @@ input::-ms-input-placeholder {
 .detailsAppear{
   animation-name: detailsAppear;
   animation-duration: 1.5s;
-  left: 81px;
+  left: 109px;
 }
 
 @keyframes detailsAppear {
-  from {left: 177px}
-  to {left: 81px;}
+  from {left: 190px}
+  to {left: 109px;}
 }
 
 .detailsDisappear{
@@ -102,28 +103,45 @@ input::-ms-input-placeholder {
 }
 
 @keyframes detailsDisappear {
-  from {left: 81px}
-  to {left: 177px;}
+  from {left: 109px}
+  to {left: 190px;}
 }
 
 .iconMovesLeft{
   animation-name: iconMovesLeft;
   animation-duration: 1.5s;
   left: -85px;
+
 }
 
 @keyframes iconMovesLeft {
-  from {left: 0.5rem}
-  to {left: -85px;}
+  from {left: 0.25rem}
+  to {left: -85px}
 }
 
 .iconMovesRight{
   animation-name: iconMovesRight;
   animation-duration: 1.5s;
-  left: 0.5rem;
+  left: 0.25rem;
+  /* position: absolute; */
+  /* left: 0.5rem; */
 }
 
 @keyframes iconMovesRight {
   from {left: -85px}
-  to {left: 0.5rem;}
+  to {left: 0.25rem;}
+}
+
+/* .miniCardMargins {
+  margin: auto min(4vh, 0.1rem)
+} */
+.miniDefault {
+  width: 95%;
+  /* margin-top: 44%; */
+}
+:root{
+  --max-width: 100%;
+}
+.maxWidth {
+  max-width: var(--max-width)
 }

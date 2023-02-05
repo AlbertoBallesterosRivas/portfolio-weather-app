@@ -131,22 +131,22 @@ const MiniCard = ({ day, opened, setOpened, language, scale }) => {
 
   return (
     <li
-      className={`flex flex-col	items-center justify-start w-44 h-[500px] max-w-44 rounded-[22px] bg-gradient-to-b ${cardColor} text-white overflow-hidden 
+      className={`flex flex-col	items-center justify-start w-[10%] h-[500px] mt-[30px] rounded-[22px] bg-gradient-to-b ${cardColor} text-white overflow-hidden 
       cursor-pointer mx-4 relative minicard ${
         mouseIn ? "shadow-clickable" : ""
-      } ${detailed} ${detailed === "miniDetailed" ? "w-[inherit]" : ""}`}
+      } ${detailed} ${detailed === "miniDetailed" ? "w-[20%]" : ""}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleCard}
     >
-      <div className="flex justify-center w-[inherit]">
-        <div className="min-w-[80px] ml-8">
+      <div className="flex flex-col items-center justify-center w-full ">
+        {/* <div className="min-w-[80px] ml-8"> */}
           <p className="text-lg mt-8">{dateString}</p>
           <p className="text-lg mt-4">{description}</p>
           <p className="text-4xl mt-4">{Math.trunc(temperature)}º</p>
-        </div>
+        {/* </div> */}
       </div>
-      <div className="flex">
+      <div className="flex w-full relative">
         <Details
           key={day.dt}
           weather={day}

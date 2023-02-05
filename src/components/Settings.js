@@ -1,8 +1,10 @@
 import { useState } from "react";
 import SettingsSelect from "./SettingsSelect";
+import useBreakpoints from "./useBreakPoints";
 
 const Settings = ({ language, setLanguage, scale, setScale }) => {
   const [display, setDisplay] = useState(false);
+  const { isXs, isSm } = useBreakpoints();
 
   const handleSettingsClick = () => {
     setDisplay(!display);
@@ -11,9 +13,9 @@ const Settings = ({ language, setLanguage, scale, setScale }) => {
   return (
     <div
       onClick={handleSettingsClick}
-      className="flex text-white absolute right-32 cursor-pointer"
+      className={`flex ${isXs || isSm ? "w-1/4 " : "w-1/3 "} justify-center text-white cursor-pointer relative`}
     >
-      <svg
+      {isXs || isSm ? "" : <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -29,7 +31,8 @@ const Settings = ({ language, setLanguage, scale, setScale }) => {
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="2" y1="12" x2="22" y2="12"></line>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-      </svg>
+      </svg>}
+      
 
       <span className="border-r border-solid border-white px-2.5">
         {language}

@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import Icon from "./Icon";
 import Details from "./Details";
+import useBreakpoints from "./useBreakPoints";
 
-const MainCard = ({ weather, city, language, scale }) => {
+const MainCard = ({ weather, city, language, scale, date }) => {
   const [detailed, setDetailed] = useState(null);
   const [mouseIn, setMouseIn] = useState(false);
   const [description, setDescription] = useState(null);
-  const [dateString, setDateString] = useState(null);
+  const [dateString, setDateString] = useState(date);
   const [temperature, setTemperature] = useState(null);
-  const date = new Date();
-
+  console.log("DATE", date);
+  //const date = new Date();
+  const { isXs } = useBreakpoints();
   useEffect(() => {
     switch (scale) {
       case "ºF":
@@ -91,6 +93,9 @@ const MainCard = ({ weather, city, language, scale }) => {
       }, ${date.getDate()} ${month}`
     );
   }, [language, weather]);
+  // console.log("WEEKDAY",  date.toLocaleDateString(language, {
+  //   weekday: "long",
+  //  }));
 
   const handleCard = () => {
     if (!detailed || detailed === "backToBasic") {
@@ -128,16 +133,16 @@ const MainCard = ({ weather, city, language, scale }) => {
   return (
     <div
       onClick={handleCard}
-      className={`relative w-1/2 h-40 rounded-[22px]  text-white
+      className={`relative ${isXs ? "w-[90%]" : "w-[60%]"} h-40 rounded-[22px] mt-4 text-white
        overflow-hidden cursor-pointer ${detailed} bg-gradient-to-r ${cardColor} ${
         mouseIn ? "shadow-clickable" : ""
       }`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h1 className="pl-10 pt-6 text-lg">{description}</h1>
+      <h1 className={`${isXs ? "pl-4" : "pl-10"} pt-6 text-lg`}>{description}</h1>
       <div className="flex items-center">
-        <p className="pl-10 pt-1 text-6xl" title="Temperature">
+        <p className={`${isXs ? "pl-4" : "pl-10"} pt-1 text-6xl`} title="Temperature">
           {Math.trunc(temperature)}º
         </p>
 
@@ -147,8 +152,8 @@ const MainCard = ({ weather, city, language, scale }) => {
         </div>
 
         <div className="">
-          <p>{dateString}</p>
-          <div className="flex items-center">
+          <p>{dateString.toString()}</p>
+          {city ? <div className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -165,7 +170,7 @@ const MainCard = ({ weather, city, language, scale }) => {
               <circle cx="12" cy="10" r="3"></circle>
             </svg>
             <span className="pl-2 capitalize-first">{city}</span>
-          </div>
+          </div>:""}
         </div>
       </div>
 
