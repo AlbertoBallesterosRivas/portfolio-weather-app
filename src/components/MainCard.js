@@ -9,8 +9,7 @@ const MainCard = ({ weather, city, language, scale, date }) => {
   const [description, setDescription] = useState(null);
   const [dateString, setDateString] = useState(date);
   const [temperature, setTemperature] = useState(null);
-  console.log("DATE", date);
-  //const date = new Date();
+
   const { isXs } = useBreakpoints();
   useEffect(() => {
     switch (scale) {
@@ -93,9 +92,6 @@ const MainCard = ({ weather, city, language, scale, date }) => {
       }, ${date.getDate()} ${month}`
     );
   }, [language, weather]);
-  // console.log("WEEKDAY",  date.toLocaleDateString(language, {
-  //   weekday: "long",
-  //  }));
 
   const handleCard = () => {
     if (!detailed || detailed === "backToBasic") {

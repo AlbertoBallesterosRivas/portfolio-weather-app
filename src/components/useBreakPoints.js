@@ -1,11 +1,5 @@
 import useMediaQuery from "./useMediaQuery";
 
-/**
- * Get a set of boolean representing which breakpoint is active
- * and which breakpoints are inactive.
- *
- * Inspired by: https://github.com/contra/react-responsive/issues/162#issuecomment-592082035
- */
 export default function useBreakpoints() {
   const breakpoints = {
     isXs: useMediaQuery("(max-width: 640px)"),

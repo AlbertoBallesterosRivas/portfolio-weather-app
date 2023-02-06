@@ -15,7 +15,6 @@ const Weather = ({ weather, city, forecast, language, scale }) => {
 
   let tomorrow = new Date();
   tomorrow.setDate(today.getDate() + 1);
-  console.log("TOMOTTRRO", tomorrow);
   const tomorrowFormattedMonth = `${tomorrow.getMonth() + 1}`;
   const tomorrowFormatted = `${tomorrow.getFullYear()}-${tomorrowFormattedMonth.padStart(
     2,
