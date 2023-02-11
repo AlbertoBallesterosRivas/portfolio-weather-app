@@ -93,7 +93,7 @@ input::-ms-input-placeholder {
 }
 
 @keyframes detailsAppear {
-  from {left: 190px}
+  from {left: 192px}
   to {left: 109px;}
 }
 
@@ -104,7 +104,7 @@ input::-ms-input-placeholder {
 
 @keyframes detailsDisappear {
   from {left: 109px}
-  to {left: 190px;}
+  to {left: 192px;}
 }
 
 .iconMovesLeft{

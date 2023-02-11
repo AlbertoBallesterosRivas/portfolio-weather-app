@@ -201,7 +201,7 @@ const Details = ({ weather, mini, language, detailed }) => {
 
   return (
     <ul
-      className={`mt-9  ${mini ? "absolute left-[190px] w-2/3" : width} ${
+      className={`mt-9  ${mini ? "absolute left-[192px] w-2/3" : width} ${
         detailed === "miniDetailed" ? "detailsAppear" : ""
       } ${detailed === "miniBackToBasic" ? "detailsDisappear" : ""}`}
     >
