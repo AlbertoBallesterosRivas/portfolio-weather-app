@@ -52,7 +52,7 @@ const MainCard = ({ weather, city, language, scale, date }) => {
             setDescription("Rain");
             break;
           case "Clouds":
-            setDescription("Clouds");
+            setDescription("Cloudy");
             break;
           case "Snow":
             setDescription("Snow");

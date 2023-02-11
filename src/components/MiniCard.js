@@ -51,7 +51,7 @@ const MiniCard = ({ day, opened, setOpened, language, scale }) => {
             setDescription("Rain");
             break;
           case "Clouds":
-            setDescription("Clouds");
+            setDescription("Cloudy");
             break;
           case "Snow":
             setDescription("Snow");
@@ -140,11 +140,9 @@ const MiniCard = ({ day, opened, setOpened, language, scale }) => {
       onClick={handleCard}
     >
       <div className="flex flex-col items-center justify-center w-full ">
-        {/* <div className="min-w-[80px] ml-8"> */}
-          <p className="text-lg mt-8">{dateString}</p>
-          <p className="text-lg mt-4">{description}</p>
-          <p className="text-4xl mt-4">{Math.trunc(temperature)}º</p>
-        {/* </div> */}
+        <p className="text-lg mt-8">{dateString}</p>
+        <p className="text-lg mt-4">{description}</p>
+        <p className="text-4xl mt-4">{Math.trunc(temperature)}º</p>
       </div>
       <div className="flex w-full relative">
         <Details
