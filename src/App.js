@@ -27,7 +27,7 @@ const App = () => {
       let lon = null;
       axios
         .get(
-          `http://api.openweathermap.org/data/2.5/weather?q=${capital}&appid=${key}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${capital}&appid=${key}&units=metric`
         )
         .then(({ data }) => {
           lat = data.coord.lat;
@@ -36,7 +36,7 @@ const App = () => {
           setNotification(null);
           axios
             .get(
-              `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
+              `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
             )
             .then(({ data }) => {
               setCityForCard(capital);
@@ -57,7 +57,7 @@ const App = () => {
 
     axios
       .get(
-        `http://api.openweathermap.org/data/2.5/weather?q=${cityForCard}&appid=${key}&units=metric`
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityForCard}&appid=${key}&units=metric`
       )
       .then(({ data }) => {
         lat = data.coord.lat;
@@ -66,7 +66,7 @@ const App = () => {
         setNotification(null);
         axios
           .get(
-            `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${key}`
           )
           .then(({ data }) => {
             setWeather(data.list[0]);
