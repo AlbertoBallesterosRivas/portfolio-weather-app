@@ -54,7 +54,7 @@ const MiniIcon = ({ weather, detailed }) => {
       style={{ "--max-width": maxWidth }}
       className={`maxWidth absolute left-1 ${iconClass} ${top}`}
     >
-      <img src={imgSrc} alt="" />
+      <img src={imgSrc} alt="" className="max-w-[188px]" />
     </div>
   );
 };

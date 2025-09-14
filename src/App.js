@@ -18,7 +18,7 @@ const App = () => {
   const [scale, setScale] = useState("ºC");
 
   const getNewCity = () => {
-    axios.get("https://restcountries.com/v3.1/all").then(({ data }) => {
+    axios.get("https://restcountries.com/v3.1/all?fields=capital").then(({ data }) => {
       let capital = data[Math.floor(Math.random() * 200)].capital;
 
       setCity("");
@@ -98,7 +98,7 @@ const App = () => {
           />
         </Header>
         <NewCityButton getNewCity={getNewCity} language={language} />
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center max-w-[1920px] mx-auto">
           <Notification message={notification} />
           <Weather
             weather={weather}
